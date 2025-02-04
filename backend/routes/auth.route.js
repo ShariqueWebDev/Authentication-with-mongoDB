@@ -1,8 +1,11 @@
 import express from "express";
 import {
+  isUserAthenticated,
   login,
   logout,
   register,
+  resetPassword,
+  sendResetOtp,
   sendVerifyOtp,
   verifyEmail,
 } from "../controllers/auth.controller.js";
@@ -19,5 +22,9 @@ router.post("/logout", logout);
 router.post("/send-verify-otp", userAuth, sendVerifyOtp);
 
 router.post("/verify-account", userAuth, verifyEmail);
+
+router.post("/is-auth", userAuth, isUserAthenticated);
+router.post("/send-reset-otp", sendResetOtp);
+router.post("/reset-password", resetPassword)
 
 export default router;

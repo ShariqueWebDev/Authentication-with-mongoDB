@@ -1,9 +1,11 @@
 import express from "express";
-import { connectDB } from "./db/connectDB.js";
 import { configDotenv } from "dotenv";
-import authRoutes from "./routes/auth.route.js";
 import cors from "cors";
 import cookieParser from "cookie-parser";
+
+import { connectDB } from "./db/connectDB.js";
+import authRoutes from "./routes/auth.route.js";
+import userAuth from "./middleware/userAuth.js";
 
 const app = express();
 const port = 5000;
@@ -17,6 +19,7 @@ app.get("/", (req, res) => {
 });
 
 app.use("/api/auth", authRoutes);
+app.use("/api/user", userAuth);
 
 app.listen(port, () => {
   connectDB();
